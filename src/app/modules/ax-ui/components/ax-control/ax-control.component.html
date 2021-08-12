@@ -1,0 +1,8 @@
+<div class="ax-control" #wrap>
+  <label [ngStyle]="{'color': form?.disabled ? '#e9e9e9' : 'black'}">{{title}}</label>
+  <ng-content></ng-content>
+  <ng-container *ngFor="let errorInfo of errorsInfo$ | async">
+    <div class="error" *ngIf="isErrorExist(form?.control?.errors, errorInfo.name)">{{errorInfo.text}}</div>
+  </ng-container>
+</div>
+
