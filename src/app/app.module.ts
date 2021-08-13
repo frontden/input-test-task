@@ -4,17 +4,19 @@ import {AxUIModule} from './modules/ax-ui/ax-ui.module';
 
 import { AppComponent } from './app.component';
 import {FormsModule} from "@angular/forms";
+import {DateValidator} from "./validators/date.validator";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DateValidator
   ],
   imports: [
     BrowserModule,
     AxUIModule,
     FormsModule
   ],
-  providers: [],
+  providers: [DateValidator],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

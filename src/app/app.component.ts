@@ -8,4 +8,5 @@ import { Component } from '@angular/core';
 export class AppComponent {
   model = null;
   model2 = null;
+  model3 = null;
 }

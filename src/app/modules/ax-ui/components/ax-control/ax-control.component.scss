@@ -30,16 +30,9 @@
     &:disabled::placeholder {
       color: #e9e9e9;
     }
+    &.ng-invalid {
+      border-color: red;
+    }
   }
-  &.ng-invalid.ng-touched {
-    border-color: red;
-  }
-}
 
-.error {
-  color: #c75f5f;
-  font-size: 10px;
-  font-weight: 500;
-  padding-left: 8px;
-  margin-top: 4px;
 }

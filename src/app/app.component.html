@@ -1,13 +1,25 @@
 <div class="input-row">
 
-  <ax-control title="Title">
-    <input [(ngModel)]="model" placeholder="Placeholder text" required dateValidator>
+  <ax-control title="Date validator">
+    <input [(ngModel)]="model"
+           placeholder="Placeholder text"
+           required
+           dateValidator>
     <validation when="required">Required</validation>
     <validation when="dateValidator">Incorrect Date</validation>
   </ax-control>
 
-  <ax-control title="Title">
-    <input [(ngModel)]="model2" placeholder="Placeholder text" disabled required dateValidator>
+  <ax-control title="On blur changes">
+    <input [(ngModel)]="model2"
+           [ngModelOptions]="{updateOn: 'blur'}"
+           placeholder="Placeholder text"
+           required>
+    <validation when="required">Required</validation>
+    <validation when="dateValidator">Incorrect Date</validation>
+  </ax-control>
+
+  <ax-control title="Disabled">
+    <input [(ngModel)]="model3" placeholder="Placeholder text" disabled required dateValidator>
     <validation when="required">Required</validation>
     <validation when="dateValidator">Incorrect Date</validation>
   </ax-control>

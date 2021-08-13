@@ -1,1 +1,7 @@
-<ng-content></ng-content>
+<div class="error" *ngIf="form && !form.disabled && form.hasError(when)">
+  <ng-content></ng-content>
+</div>
+
+
+
+

@@ -1,4 +1,11 @@
-import {ChangeDetectionStrategy, Component, ElementRef, Input} from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+} from '@angular/core';
+import {NgModel} from "@angular/forms";
 
 @Component({
   selector: 'validation',
@@ -6,18 +13,14 @@ import {ChangeDetectionStrategy, Component, ElementRef, Input} from '@angular/co
   styleUrls: ['./validation.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ValidationComponent {
+export class ValidationComponent implements AfterViewInit{
   @Input() when = '';
+  form?: NgModel;
 
-  get errorText(): string {
-    return this.element.nativeElement.textContent;
+  constructor(private changeDetectorRef: ChangeDetectorRef) {
   }
 
-  get elementRef(): ElementRef {
-    return this.element;
+  ngAfterViewInit() {
+    this.form?.valueChanges?.subscribe(() => this.changeDetectorRef.markForCheck());
   }
-
-  constructor(private element: ElementRef) {
-  }
-
 }
