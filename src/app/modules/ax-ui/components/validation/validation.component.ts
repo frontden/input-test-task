@@ -3,9 +3,11 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  Input,
+  Input, OnDestroy,
 } from '@angular/core';
 import {NgModel} from "@angular/forms";
+import {Subject} from "rxjs";
+import {takeUntil} from "rxjs/operators";
 
 @Component({
   selector: 'validation',
@@ -13,14 +15,22 @@ import {NgModel} from "@angular/forms";
   styleUrls: ['./validation.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ValidationComponent implements AfterViewInit{
+export class ValidationComponent implements AfterViewInit, OnDestroy {
   @Input() when = '';
   form?: NgModel;
+  destroy$ = new Subject();
 
   constructor(private changeDetectorRef: ChangeDetectorRef) {
   }
 
   ngAfterViewInit() {
-    this.form?.valueChanges?.subscribe(() => this.changeDetectorRef.markForCheck());
+    this.form?.valueChanges?.pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(() => this.changeDetectorRef.markForCheck());
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.unsubscribe();
   }
 }
